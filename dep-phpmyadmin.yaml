@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: phpmyadmin
+  name: phpmyadmin
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - env:
+        - name: PMA_HOST
+          value: db
+        - name: PMA_PORT
+          value: "3306"
+        image: phpmyadmin
+        name: phpmyadmin
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}
