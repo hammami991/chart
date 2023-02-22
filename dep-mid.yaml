@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dep-mid
+  name: dep-mid
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dep-mid
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dep-mid
+    spec:
+      containers:
+      - image: hammami991/k8s-mid
+        name: k8s-mid
+        resources: {}
+status: {}
