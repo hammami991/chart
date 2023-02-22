@@ -18,7 +18,96 @@ spec:
         app: dep-backend
     spec:
       containers:
-      - image: hammami991/k8s-backend
+      - args:
+        - gunicorn
+        - config.wsgi:application
+        - --bind
+        - 0.0.0.0:8000
+        env:
+        - name: DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: DATABASE
+              name: django-backend--env
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: DB_DATABASE
+              name: django-backend--env
+        - name: DB_ENGINE
+          valueFrom:
+            configMapKeyRef:
+              key: DB_ENGINE
+              name: django-backend--env
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: DB_HOST
+              name: django-backend--env
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DB_PASSWORD
+              name: django-backend--env
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: DB_PORT
+              name: django-backend--env
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              key: DB_USER
+              name: django-backend--env
+        - name: DEBUG
+          valueFrom:
+            configMapKeyRef:
+              key: DEBUG
+              name: django-backend--env
+        - name: DJANGO_ADMIN_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              key: DJANGO_ADMIN_EMAIL
+              name: django-backend--env
+        - name: DJANGO_ADMIN_FIRST_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: DJANGO_ADMIN_FIRST_NAME
+              name: django-backend--env
+        - name: DJANGO_ADMIN_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: DJANGO_ADMIN_PASSWORD
+              name: django-backend--env
+        - name: DJANGO_ADMIN_USER
+          valueFrom:
+            configMapKeyRef:
+              key: DJANGO_ADMIN_USER
+              name: django-backend--env
+        - name: DJANGO_ALLOWED_HOSTS
+          valueFrom:
+            configMapKeyRef:
+              key: DJANGO_ALLOWED_HOSTS
+              name: django-backend--env
+        - name: DJANGO_ENV
+          valueFrom:
+            configMapKeyRef:
+              key: DJANGO_ENV
+              name: django-backend--env
+        - name: SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              key: SECRET_KEY
+              name: django-backend--env
+        image: hammami991/k8s-backend
         name: k8s-backend
         resources: {}
+        volumeMounts:
+        - mountPath: /usr/src/app/static
+          name: django-static-volume
+      restartPolicy: Always
+      volumes:
+      - name: django-static-volume
+        persistentVolumeClaim:
+          claimName: django-static-volume
 status: {}
