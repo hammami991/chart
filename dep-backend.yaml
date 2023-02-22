@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dep-backend
+  name: dep-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dep-backend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dep-backend
+    spec:
+      containers:
+      - image: hammami991/k8s-backend
+        name: k8s-backend
+        resources: {}
+status: {}
