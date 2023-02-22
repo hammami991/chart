@@ -1,4 +1,20 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-volume
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: my-storage-class
+  hostPath:
+    path: /mnt/data
+
+---
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
@@ -11,4 +27,6 @@ spec:
   resources:
     requests:
       storage: 100Mi
+  storageClassName: my-storage-class
 status: {}
+
