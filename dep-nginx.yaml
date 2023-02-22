@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dep-nginx
+  name: dep-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dep-nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dep-nginx
+    spec:
+      containers:
+      - image: hammami991/k8s-nginx
+        name: k8s-nginx
+        resources: {}
+status: {}
